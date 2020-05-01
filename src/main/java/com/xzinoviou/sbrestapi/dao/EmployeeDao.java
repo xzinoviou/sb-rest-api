@@ -1,9 +1,10 @@
 package com.xzinoviou.sbrestapi.dao;
 
 import com.xzinoviou.sbrestapi.entity.Employee;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface EmployeeDao extends JpaRepository<Employee, Long> {
+import java.util.List;
+
+public interface EmployeeDao {
+
+    List<Employee> findAll();
 }
