@@ -51,13 +51,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Long update(Employee employee) {
         Session session = entityManager.unwrap(Session.class);
 
-        String sql = "update Employee e set e.firstName =: firstName, e.lastName =: lastName, e.email =: email , e.dateOfCreation =: dateOfCreation where e.id = ? ";
+        String sql = "update Employee e set e.firstName =: firstName, e.lastName =: lastName, e.email =: email , e.dateOfCreation =: dateOfCreation where e.id =: id ";
 
         Query query = session.createQuery(sql);
         query.setParameter("firstName", employee.getFirstName());
         query.setParameter("lastName", employee.getLastName());
         query.setParameter("email", employee.getEmail());
         query.setParameter("dateOfCreation", employee.getDateOfCreation());
+        query.setParameter("id", employee.getId());
 
         try {
             query.executeUpdate();
