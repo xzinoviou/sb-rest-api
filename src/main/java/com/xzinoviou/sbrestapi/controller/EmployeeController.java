@@ -27,7 +27,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Long saveEmployee(@RequestBody Employee employee) {
+    public Employee saveEmployee(@RequestBody Employee employee) {
         return employeeService.save(employee);
     }
 

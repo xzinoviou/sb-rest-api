@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public Long save(Employee employee) {
+    public Employee save(Employee employee) {
         return employeeDao.save(employee);
     }
 

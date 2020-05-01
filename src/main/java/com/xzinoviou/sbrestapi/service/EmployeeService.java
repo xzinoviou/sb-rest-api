@@ -10,7 +10,7 @@ public interface EmployeeService {
 
     List<Employee> getAll();
 
-    Long save(Employee employee);
+    Employee save(Employee employee);
 
     Long update(Employee employee);
 

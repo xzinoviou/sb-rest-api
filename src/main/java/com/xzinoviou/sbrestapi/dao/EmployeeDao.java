@@ -10,7 +10,7 @@ public interface EmployeeDao {
 
     List<Employee> findAll();
 
-    Long save(Employee employee);
+    Employee save(Employee employee);
 
     Long update(Employee employee);
 

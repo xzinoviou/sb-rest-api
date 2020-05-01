@@ -1,12 +1,11 @@
 package com.xzinoviou.sbrestapi.dao;
 
 import com.xzinoviou.sbrestapi.entity.Employee;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -24,35 +23,27 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee findById(Long id) {
-        Session session = entityManager.unwrap(Session.class);
-
-        return session.get(Employee.class, id);
+        return entityManager.find(Employee.class, id);
     }
 
     @Override
     public List<Employee> findAll() {
-        Session session = entityManager.unwrap(Session.class);
-
-        Query<Employee> query = session.createQuery("from Employee e", Employee.class);
+        TypedQuery<Employee> query = entityManager.createQuery("from Employee e", Employee.class);
 
         return query.getResultList();
     }
 
     @Override
-    public Long save(Employee employee) {
+    public Employee save(Employee employee) {
 
-        Session session = entityManager.unwrap(Session.class);
-
-        return (Long) session.save(employee);
+        return entityManager.merge(employee);
     }
 
     @Override
     public Long update(Employee employee) {
-        Session session = entityManager.unwrap(Session.class);
 
         String sql = "update Employee e set e.firstName =: firstName, e.lastName =: lastName, e.email =: email , e.dateOfCreation =: dateOfCreation where e.id =: id ";
-
-        Query query = session.createQuery(sql);
+        Query query = entityManager.createQuery(sql);
         query.setParameter("firstName", employee.getFirstName());
         query.setParameter("lastName", employee.getLastName());
         query.setParameter("email", employee.getEmail());
@@ -69,11 +60,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public void delete(Long id) {
-
-        Session session = entityManager.unwrap(Session.class);
-
-        Query query = session.createQuery("delete from Employee e where e.id =: id");
-
+        Query query = entityManager.createQuery("delete from Employee e where e.id =: id");
         query.setParameter("id", id);
 
         try {
