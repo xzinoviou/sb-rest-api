@@ -12,7 +12,7 @@ public interface EmployeeService {
 
     Employee save(Employee employee);
 
-    Long update(Employee employee);
+    Employee update(Employee employee);
 
     void delete(Long id);
 }

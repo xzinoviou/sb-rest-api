@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     @PutMapping
-    public Long updateEmployee(@RequestBody Employee employee) {
+    public Employee updateEmployee(@RequestBody Employee employee) {
         return employeeService.update(employee);
     }
 

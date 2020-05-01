@@ -1,6 +1,6 @@
 package com.xzinoviou.sbrestapi.service;
 
-import com.xzinoviou.sbrestapi.dao.EmployeeDao;
+import com.xzinoviou.sbrestapi.dao.EmployeeRepository;
 import com.xzinoviou.sbrestapi.entity.Employee;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,39 +10,39 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeDao employeeDao;
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Transactional
     @Override
     public Employee getById(Long id) {
-        return employeeDao.findById(id);
+        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found : " + id));
     }
 
     @Transactional
     @Override
     public List<Employee> getAll() {
-        return employeeDao.findAll();
+        return employeeRepository.findAll();
     }
 
     @Transactional
     @Override
     public Employee save(Employee employee) {
-        return employeeDao.save(employee);
+        return employeeRepository.save(employee);
     }
 
     @Transactional
     @Override
-    public Long update(Employee employee) {
-        return employeeDao.update(employee);
+    public Employee update(Employee employee) {
+        return employeeRepository.save(employee);
     }
 
     @Transactional
     @Override
     public void delete(Long id) {
-        employeeDao.delete(id);
+        employeeRepository.deleteById(id);
     }
 }
