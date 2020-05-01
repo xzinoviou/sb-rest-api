@@ -16,6 +16,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee getById(Long id) {
+        return employeeDao.findById(id);
+    }
+
+    @Override
     public List<Employee> getAll() {
         return employeeDao.findAll();
     }
@@ -23,5 +28,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Long save(Employee employee) {
         return employeeDao.save(employee);
+    }
+
+    @Override
+    public Long update(Employee employee) {
+        return employeeDao.update(employee);
+    }
+
+    @Override
+    public void delete(Long id) {
+        employeeDao.delete(id);
     }
 }

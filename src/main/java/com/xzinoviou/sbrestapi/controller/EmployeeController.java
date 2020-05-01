@@ -4,8 +4,6 @@ import com.xzinoviou.sbrestapi.entity.Employee;
 import com.xzinoviou.sbrestapi.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -23,8 +21,23 @@ public class EmployeeController {
         return employeeService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public Employee getEmployee(@PathVariable Long id) {
+        return employeeService.getById(id);
+    }
+
     @PostMapping
     public Long saveEmployee(@RequestBody Employee employee) {
         return employeeService.save(employee);
+    }
+
+    @PutMapping
+    public Long updateEmployee(@RequestBody Employee employee) {
+        return employeeService.update(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        employeeService.delete(id);
     }
 }
