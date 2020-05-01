@@ -7,4 +7,6 @@ import java.util.List;
 public interface EmployeeDao {
 
     List<Employee> findAll();
+
+    Long save(Employee employee);
 }

@@ -2,10 +2,10 @@ package com.xzinoviou.sbrestapi.controller;
 
 import com.xzinoviou.sbrestapi.entity.Employee;
 import com.xzinoviou.sbrestapi.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -21,5 +21,10 @@ public class EmployeeController {
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAll();
+    }
+
+    @PostMapping
+    public Long saveEmployee(@RequestBody Employee employee) {
+        return employeeService.save(employee);
     }
 }

@@ -19,4 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getAll() {
         return employeeDao.findAll();
     }
+
+    @Override
+    public Long save(Employee employee) {
+        return employeeDao.save(employee);
+    }
 }

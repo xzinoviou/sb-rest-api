@@ -31,4 +31,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         return query.getResultList();
     }
+
+    @Override
+    public Long save(Employee employee) {
+
+        Session session = entityManager.unwrap(Session.class);
+
+        return (Long) session.save(employee);
+    }
 }
